@@ -1,42 +1,249 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+.navbar-brand:hover .logo {
+  transform: scale(1.1);
+}
+
+.navbar {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e3e3e3;
+}
+
+.nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #28a745 !important;
+  transform: translateY(-2px);
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 254px;
+  height: 52px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Products */
+.img-products {
+  width: 92%;
+  height: 92%;
+  object-fit: cover;
 }
 
 .card {
-  padding: 2em;
+  border-radius: 16px;
+  background: #FFF;
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.read-the-docs {
-  color: #888;
+.btn-buy {
+  display: flex;
+  height: 44px;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #62825D;
+  color: #FFF;
+}
+
+.product-page {
+  background-color: #526E48;
+  margin-top: -30px;
+  padding-top: 50px;
+}
+
+
+/* home */
+.hero-section {
+  background: url('../public/bg-hero1.jpg') no-repeat center center/cover;
+  height: 90vh;
+  margin-top: -30px;
+  object-fit: cover;
+}
+
+.hero-section h1 {
+  color: var(--Light-Green-100, #CDFFBD);
+  text-align: right;
+  font-family: Poppins;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 80px;
+  padding-top: 128px;
+}
+
+.hero-section p {
+  color: var(--Light-Green-100, #CDFFBD);
+  text-align: right;
+  font-family: Poppins;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 40px;
+  padding-top: 32px;
+}
+
+.hero-section .shop-now {
+  display: flex;
+  width: 224px;
+  height: 55px;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  background: var(--Light-Lime-300, #B0FF78);
+  color: var(--Light-Green-800, #24771A);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.footer {
+  padding-top: 60px;
+}
+
+.footer p {
+  color: var(--custom-02-Text-primary, #091E42);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.footer .col-subsribe {
+  margin-left: 100px;
+}
+
+.footer .btn-subsribe {
+  display: flex;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: 0px 8px 8px 0px;
+  background: var(--Light-Green-600, #1ED017);
+  color: #FFF;
+}
+
+.footer-text {
+  color: var(--custom-02-Text-primary, #091E42);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  opacity: 0.7;
+}
+
+/* Whyous */
+.container-whyous {
+  margin-top: 94px;
+}
+
+.why-ous .card {
+  width: 274px;
+  height: 282px;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-left: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-ous .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px 0px rgba(36, 163, 27, 0.4);
+}
+
+.why-ous .title {
+  color: var(--Neutral-Gray, #333);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.why-ous p {
+  color: var(--Neutral-Gray, #333);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 200px;
+    height: 40px;
+  }
+
+  .hero-section {
+    height: 50vh;
+  }
+
+  .hero-section h1 {
+    font-size: 28px;
+    line-height: 48px;
+    padding-top: 64px;
+    text-align: center;
+  }
+
+  .hero-section p {
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .custom-center {
+    justify-content: center !important;
+  }
+
+  .footer .col-subsribe {
+    margin-left: 0;
+  }
+
+  .btn-danger {
+    margin-top: 10px;
+  }
+
+  .why-ous .card {
+    margin-left: 40px;
+    margin-top: 25px;
+  }
+}
+
+/* animasi loading */
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
