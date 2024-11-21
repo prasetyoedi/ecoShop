@@ -1,6 +1,4 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 
 export default function Footer() {
     return (
@@ -10,9 +8,7 @@ export default function Footer() {
                     <div className='col-md-6'>
                         <img src="/logo.png" alt="Logo Eco Shop" className='logo' />
                         <p className='mt-3'>
-                            Eco Shop is your trusted destination for premium, eco-friendly products.
-                            We're committed to delivering a holistic approach to wellness,
-                            harnessing nature's power to support a healthier, more sustainable lifestyle.
+                            Eco Shop adalah tujuan tepercaya Anda untuk produk premium yang ramah lingkungan. Kami berkomitmen untuk memberikan pendekatan holistik terhadap kesehatan, memanfaatkan kekuatan alam untuk mendukung gaya hidup yang lebih sehat dan lebih berkelanjutan.
                         </p>
                         <div className='pb-5'>
                             <img src="/sosmed/fb.svg" alt="icon facebook" className='me-3' />
@@ -23,14 +19,14 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className='col-md-5 col-subsribe'>
-                        <p className='fw-bold'>Receive offers & discounts via e-mail</p>
+                        <p className='fw-bold'>Terima penawaran & diskon melalui email</p>
                         <div className="input-group" style={{ maxWidth: '400px' }}>
                             <span className="input-group-text bg-white border-end-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6c757d" viewBox="0 0 24 24">
                                     <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM4 6h16v.511l-8 4.8-8-4.8V6zm0 12V9.107l7.5 4.5a1 1 0 0 0 1 0L20 9.107V18H4z" />
                                 </svg>
                             </span>
-                            <input type="email" className="form-control border-start-0" placeholder="Enter Email" aria-label="Enter Email" />
+                            <input type="email" className="form-control border-start-0" placeholder="Enter Email" aria-label="Masukkan Email" />
                             <div className="btn-subsribe">Subscribe</div>
                         </div>
                     </div>
