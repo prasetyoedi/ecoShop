@@ -49,7 +49,7 @@ body {
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.btn-buy {
+.btn-lihat-detail-produk {
   display: flex;
   height: 44px;
   padding: 10px 16px;
@@ -58,12 +58,14 @@ body {
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
-  background: #62825D;
+  border-radius: 8px;
+  background: var(--Light-Green-600, #1ED017);
   color: #FFF;
+  text-decoration: none;
 }
 
 .product-page {
-  background-color: #526E48;
+  background: var(--Light-Green-800, #24771A);
   margin-top: -30px;
   padding-top: 50px;
 }
@@ -114,6 +116,67 @@ body {
   line-height: 28px;
 }
 
+/* Whyous */
+.container-whyous {
+  padding-top: 94px;
+  background: var(--Light-Green-800, #24771A);
+  padding-bottom: 50px;
+}
+
+.why-ous .card {
+  width: 274px;
+  height: 282px;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-left: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-ous .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px 0px rgba(36, 163, 27, 0.4);
+}
+
+.why-ous .title {
+  color: var(--Neutral-Gray, #333);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.why-ous p {
+  color: var(--Neutral-Gray, #333);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* About */
+.about {
+  background: url('../public/bg-about.jpg') no-repeat center center/cover;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.about .title {
+  color: var(--Black, #000);
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 38px;
+  padding-top: 36px;
+}
+
+.about p {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
 .footer {
   padding-top: 60px;
 }
@@ -150,42 +213,108 @@ body {
   opacity: 0.7;
 }
 
-/* Whyous */
-.container-whyous {
-  margin-top: 94px;
+/* componen chatbot style */
+.floating-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
-.why-ous .card {
-  width: 274px;
-  height: 282px;
-  padding: 20px;
-  gap: 10px;
+.container-bot {
+  width: 700px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+.floating-bot {
+  width: 100%;
+  background-color: white;
   border-radius: 8px;
-  background: #FFF;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 40px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.why-ous .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 8px 16px 0px rgba(36, 163, 27, 0.4);
+.close-chat-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 20px;
 }
 
-.why-ous .title {
-  color: var(--Neutral-Gray, #333);
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
+
+/* login-section */
+.login-section {
+  background: var(--Light-Green-800, #24771A);
+  width: 100%;
+  height: 90vh;
+  margin-top: -30px;
 }
 
-.why-ous p {
-  color: var(--Neutral-Gray, #333);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 300;
+.login-section .login {
+  margin-top: 73px;
+  width: 596px;
+  height: 400px;
+  padding: 64px 57px;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--White, #FFF);
+  box-shadow: 0px 4px 100px 0px rgba(0, 0, 0, 0.40);
 }
 
+.btn-login {
+  height: 44px;
+  padding: 10px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--Light-Green-600, #1ED017);
+  color: #FFF;
+  border: none;
+}
+
+
+/* Kelola produk */
+.btn-tambah {
+  display: flex;
+  width: 231px;
+  height: 44px;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--Light-Green-600, #1ED017);
+  border: none;
+  color: #FFF;
+}
+
+/* detail product */
+.btn-buy {
+  display: flex;
+  width: 231px;
+  height: 44px;
+  padding: 10px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border-radius: 8px;
+  background: var(--Light-Green-600, #1ED017);
+  color: white;
+  text-decoration: none;
+}
 
 @media screen and (max-width: 768px) {
   .logo {
@@ -226,9 +355,18 @@ body {
     margin-left: 40px;
     margin-top: 25px;
   }
+
+  .container-bot {
+    width: 375px;
+  }
+
+  .about p {
+    text-align: justify;
+  }
+
 }
 
-/* animasi loading */
+/* animasi loading detail product*/
 .spinner {
   border: 8px solid #f3f3f3;
   border-top: 8px solid #007bff;
