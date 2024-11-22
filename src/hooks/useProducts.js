@@ -8,19 +8,16 @@ const useProducts = () => {
     const [products, setProducts] = useState([]);
     // State untuk halaman produk yang sedang aktif / pagination
     const [currentPage, setCurrentPage] = useState(1);
-    // Konstanta untuk jumlah item per halaman (di sini diatur 2 item per halaman)
     const itemsPerPage = 2;
 
     // useEffect dijalankan saat komponen pertama kali di-render
     useEffect(() => {
         // Fungsi asinkron untuk mengambil data produk
         const loadProducts = async () => {
-            // Ambil data produk dari API
             const data = await fetchProducts();
             // Simpan data produk yang diambil ke dalam state 'products'
             setProducts(data);
         };
-        // Panggil fungsi loadProducts untuk memuat data saat komponen diinisialisasi
         loadProducts();
     }, []);
 
@@ -30,48 +27,40 @@ const useProducts = () => {
 
     // Tentukan produk yang akan ditampilkan pada halaman saat ini
     const currentProducts = products.slice(
-        (currentPage - 1) * itemsPerPage,  // Indeks awal produk untuk halaman saat ini
-        currentPage * itemsPerPage          // Indeks akhir produk untuk halaman saat ini
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
     );
 
     // Fungsi untuk berpindah ke halaman berikutnya
     const handleNextPage = () => {
-        // Periksa apakah halaman saat ini belum mencapai halaman terakhir
         if (currentPage < totalPages) {
-            // Jika belum, tambahkan nilai currentPage
             setCurrentPage(currentPage + 1);
         }
     };
 
     // Fungsi untuk berpindah ke halaman sebelumnya
     const handlePrevPage = () => {
-        // Periksa apakah halaman saat ini bukan halaman pertama
         if (currentPage > 1) {
-            // Jika bukan, kurangi nilai currentPage
             setCurrentPage(currentPage - 1);
         }
     };
 
     // Fungsi untuk menambah produk baru
     const addNewProduct = async (newProduct, newImage, onSuccess) => {
-        // Periksa apakah semua kolom wajib diisi
         if (!newProduct.name || !newProduct.description || !newProduct.price || !newImage) {
-            // Tampilkan pesan kesalahan jika ada kolom yang kosong
             Swal.fire('Error', 'Semua kolom harus diisi!', 'error');
             return;
         }
 
         // Unggah gambar produk dan dapatkan URL gambar
         const imageUrl = await uploadImage(newImage);
-        if (!imageUrl) return; // Jika gagal mengunggah, hentikan proses
+        if (!imageUrl) return;
 
         // Tambahkan produk baru ke server dengan data produk dan URL gambar
         const success = await addProduct({ ...newProduct, imageUrl });
         if (success) {
-            // Jika berhasil, ambil kembali daftar produk terbaru
             const data = await fetchProducts();
             setProducts(data);
-            // Panggil fungsi onSuccess jika ada
             onSuccess();
             Swal.fire('Berhasil!', 'Produk berhasil ditambahkan.', 'success');
         }
@@ -92,12 +81,9 @@ const useProducts = () => {
         // Kirim data produk yang sudah diedit ke server
         const success = await updateProduct(editModal.id, { ...editModal, imageUrl });
         if (success) {
-            // Jika berhasil, ambil kembali daftar produk terbaru
             const data = await fetchProducts();
             setProducts(data);
-            // Panggil fungsi onSuccess jika ada
             onSuccess();
-            // Tampilkan pesan sukses menggunakan Swal
             Swal.fire('Berhasil!', 'Produk berhasil diperbarui.', 'success');
         }
     };
@@ -115,16 +101,12 @@ const useProducts = () => {
 
         // Jika pengguna mengkonfirmasi penghapusan
         if (result.isConfirmed) {
-            // Hapus produk berdasarkan ID
             const success = await deleteProduct(id);
             if (success) {
-                // Jika berhasil, ambil kembali daftar produk terbaru
                 const data = await fetchProducts();
                 setProducts(data);
-                // Tampilkan pesan sukses menggunakan Swal
                 Swal.fire('Berhasil!', 'Produk berhasil dihapus.', 'success');
             } else {
-                // Jika gagal, tampilkan pesan error
                 Swal.fire('Error!', 'Gagal menghapus produk.', 'error');
             }
         }
@@ -132,15 +114,15 @@ const useProducts = () => {
 
     // Return nilai-nilai yang dibutuhkan untuk dikelola dan digunakan di komponen lain
     return {
-        products,            // Daftar lengkap produk
-        currentProducts,     // Produk yang akan ditampilkan pada halaman saat ini
-        currentPage,         // Halaman yang sedang aktif
-        totalPages,          // Jumlah total halaman
-        handleNextPage,      // Fungsi untuk berpindah ke halaman berikutnya
-        handlePrevPage,      // Fungsi untuk berpindah ke halaman sebelumnya
-        addNewProduct,       // Fungsi untuk menambah produk baru
-        editProduct,         // Fungsi untuk mengedit produk yang ada
-        deleteExistingProduct, // Fungsi untuk menghapus produk yang ada
+        products,
+        currentProducts,
+        currentPage,
+        totalPages,
+        handleNextPage,
+        handlePrevPage,
+        addNewProduct,
+        editProduct,
+        deleteExistingProduct,
     };
 };
 

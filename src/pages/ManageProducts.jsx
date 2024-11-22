@@ -5,14 +5,14 @@ import Footer from '../components/Footer';
 const ManageProducts = () => {
     // Destrukturisasi nilai dari custom hook 'useProducts'
     const {
-        currentProducts,  // Produk yang ditampilkan pada halaman saat ini
-        currentPage,      // Halaman yang sedang aktif
-        totalPages,       // Jumlah total halaman
-        handleNextPage,   // Fungsi untuk berpindah ke halaman berikutnya
-        handlePrevPage,   // Fungsi untuk berpindah ke halaman sebelumnya
-        addNewProduct,    // Fungsi untuk menambah produk baru
-        editProduct,      // Fungsi untuk mengedit produk yang ada
-        deleteExistingProduct,  // Fungsi untuk menghapus produk yang ada
+        currentProducts,
+        currentPage,
+        totalPages,
+        handleNextPage,
+        handlePrevPage,
+        addNewProduct,
+        editProduct,
+        deleteExistingProduct,
     } = useProducts();
 
     // State untuk menyimpan data produk baru yang akan ditambahkan
@@ -30,20 +30,17 @@ const ManageProducts = () => {
 
     // Fungsi untuk menambah produk baru
     const handleAddProduct = () => {
-        // Panggil fungsi 'addNewProduct' dari hook 'useProducts'
         addNewProduct(newProduct, newImage, () => {
-            // Reset data setelah produk berhasil ditambahkan
             setNewProduct({ name: '', description: '', price: '' });
             setNewImage(null);
-            setShowAddModal(false); // Tutup modal Tambah Produk
+            setShowAddModal(false);
         });
     };
 
     // Fungsi untuk menyimpan perubahan produk yang sedang diedit
     const handleSaveEditProduct = () => {
-        // Panggil fungsi 'editProduct' dari hook 'useProducts'
         editProduct(editModal, editImage, () => {
-            setShowEditModal(false); // Tutup modal Edit Produk setelah disimpan
+            setShowEditModal(false);
         });
     };
 
@@ -54,7 +51,6 @@ const ManageProducts = () => {
                 {showAddModal && (
                     <>
                         <div className="modal-backdrop fade show"></div>
-                        {/* Modal Tambah Produk */}
                         <div className="modal show" style={{ display: 'block' }}>
                             <div className="modal-dialog">
                                 <div className="modal-content">
@@ -80,7 +76,6 @@ const ManageProducts = () => {
                 {showEditModal && (
                     <>
                         <div className="modal-backdrop fade show"></div>
-                        {/* Modal Edit Produk */}
                         <div className="modal show" style={{ display: 'block' }}>
                             <div className="modal-dialog">
                                 <div className="modal-content">
@@ -103,7 +98,6 @@ const ManageProducts = () => {
                         </div>
                     </>
                 )}
-                {/* Tombol untuk membuka modal Tambah Produk */}
                 <button className="btn-tambah mb-4" onClick={() => setShowAddModal(true)}>Tambah Produk</button>
                 <div className="table-responsive">
                     <table className="table table-bordered">
@@ -127,10 +121,9 @@ const ManageProducts = () => {
                                     <td>{product.description}</td>
                                     <td>Rp {product.price}</td>
                                     <td>
-                                        {/* Tombol untuk mengedit produk */}
                                         <button className="btn btn-warning btn-sm me-2" onClick={() => {
-                                            setEditModal(product); // Set produk yang sedang diedit
-                                            setShowEditModal(true); // Buka modal Edit Produk
+                                            setEditModal(product);
+                                            setShowEditModal(true);
                                         }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
