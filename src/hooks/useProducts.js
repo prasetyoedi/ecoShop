@@ -2,20 +2,16 @@ import { useState, useEffect } from 'react';
 import { fetchProducts, addProduct, updateProduct, deleteProduct, uploadImage } from '../services/ProductService';
 import Swal from 'sweetalert2';
 
-// Custom hook 'useProducts' untuk mengelola produk
 const useProducts = () => {
     // State untuk menyimpan daftar produk
     const [products, setProducts] = useState([]);
-    // State untuk halaman produk yang sedang aktif / pagination
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 2;
 
-    // useEffect dijalankan saat komponen pertama kali di-render
     useEffect(() => {
-        // Fungsi asinkron untuk mengambil data produk
         const loadProducts = async () => {
             const data = await fetchProducts();
-            // Simpan data produk yang diambil ke dalam state 'products'
             setProducts(data);
         };
         loadProducts();
@@ -24,21 +20,17 @@ const useProducts = () => {
     // logik pagination
     // Hitung jumlah total halaman berdasarkan jumlah produk dan item per halaman
     const totalPages = Math.ceil(products.length / itemsPerPage);
-
-    // Tentukan produk yang akan ditampilkan pada halaman saat ini
     const currentProducts = products.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
-    // Fungsi untuk berpindah ke halaman berikutnya
     const handleNextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
 
-    // Fungsi untuk berpindah ke halaman sebelumnya
     const handlePrevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -74,8 +66,8 @@ const useProducts = () => {
         if (editImage) {
             // Jika ada gambar baru, unggah gambar dan dapatkan URL baru
             const uploadedImageUrl = await uploadImage(editImage);
-            if (!uploadedImageUrl) return; // Jika gagal mengunggah, hentikan proses
-            imageUrl = uploadedImageUrl;  // Gunakan URL gambar yang baru diunggah
+            if (!uploadedImageUrl) return;
+            imageUrl = uploadedImageUrl;
         }
 
         // Kirim data produk yang sudah diedit ke server
