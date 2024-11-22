@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { keyword } from '../data/keyWord';
 
 export default function Chatbot() {
     const [inputUser, setInputUser] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false);
+    const [error, setError] = useState('');
     const apiKey = import.meta.env.VITE_API_KEY;
 
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -18,50 +18,47 @@ export default function Chatbot() {
         temperature: 1,
     };
 
-    // Fungsi untuk menangani input pengguna dan memberikan respons
+    // Validasi apakah pertanyaan terkait dengan produk EcoShop
+    function isProductRelatedQuestion(question) {
+        const keywords = ['ecoshop', 'produk', 'ramah lingkungan', 'green', 'manfaat', 'green technology', 'daur ulang', 'plastik', 'rekomendasi'];
+        return keywords.some(keyword => question.toLowerCase().includes(keyword));
+    }
+
     async function handlePromptSubmit() {
         if (!inputUser.trim()) return;
 
+        // Validasi apakah pertanyaan terkait dengan produk EcoShop
+        if (!isProductRelatedQuestion(inputUser)) {
+            setError("Pertanyaan harus terkait dengan produk EcoShop atau informasinya. Coba lagi dengan pertanyaan lain.");
+            return;
+        }
+
         setLoading(true);
+        setError('');
+
         try {
             const userMessage = inputUser;
-            let botResponse = '';
 
-            // Simpan input pengguna ke riwayat
+            // Update riwayat chat dengan pesan pengguna
             setChatHistory((prevHistory) => [
                 ...prevHistory,
                 { sender: 'user', message: userMessage }
             ]);
 
-            const productMatch = keyword.find(p =>
-                new RegExp(p.name, 'i').test(userMessage)
-            );
+            // Memulai sesi chat dengan GoogleGenerativeAI
+            const chatSession = model.startChat({
+                generationConfig,
+                history: chatHistory.map((item) => ({
+                    role: item.sender === 'user' ? 'user' : 'assistant',
+                    content: item.message,
+                })),
+            });
 
-            if (productMatch) {
-                // Jika ditemukan produk yang cocok
-                botResponse = `Aku merekomendasikan kamu ${productMatch.description}. Yang memiliki manfaat ${productMatch.benefits}. Dengan harga Rp ${productMatch.price},-.`;
-            } else if (/rekomendasi/i.test(userMessage)) {
-                // Jika pengguna meminta rekomendasi produk
-                const product = keyword[0];
-                botResponse = `Rekomendasi produk: ${product.name}. Deskripsi: ${product.description}. Manfaat: ${product.benefits}. Harga: ${product.price}.`;
-            } else if (/manfaat/i.test(userMessage)) {
-                // Jika pengguna menanyakan manfaat produk
-                const productBenefits = keyword.map(p => `${p.name}: ${p.benefits}`).join("\n");
-                botResponse = `Manfaat produk kami:\n${productBenefits}`;
-            } else {
-                // Gunakan API AI jika input tidak cocok dengan respons yang disiapkan
-                const chatSession = model.startChat({
-                    generationConfig,
-                    history: chatHistory.map((item) => ({
-                        role: item.sender === 'user' ? 'user' : 'assistant',
-                        content: item.message,
-                    })),
-                });
-                const result = await chatSession.sendMessage(userMessage);
-                botResponse = result.response.text;
-            }
+            // Kirim pesan ke model dan dapatkan balasan
+            const result = await chatSession.sendMessage(userMessage);
+            const botResponse = result.response.text;
 
-            // Simpan respons chatbot ke riwayat
+            // Update riwayat chat dengan balasan bot
             setChatHistory((prevHistory) => [
                 ...prevHistory,
                 { sender: 'bot', message: botResponse }
@@ -81,6 +78,7 @@ export default function Chatbot() {
     function handleReset() {
         setInputUser('');
         setChatHistory([]);
+        setError('');
     }
 
     function toggleChat() {
@@ -102,19 +100,19 @@ export default function Chatbot() {
             {isChatOpen && (
                 <div className="p-3 container-bot">
                     <div className="card shadow-lg p-4 floating-bot">
-                        <h5>Tanya EcoBot</h5>
+                        <h5 className='text-center'>Tanya EcoShop Bot</h5>
+                        {error && <div className="alert alert-danger">{error}</div>}
                         <div className="chat-history mb-4">
                             {chatHistory.map((chat, index) => (
                                 <div key={index} className={`chat-bubble ${chat.sender}`}>
                                     <strong>
-                                        {chat.sender === 'user' ? 'Kamu' : 'EcoBot'}:
+                                        {chat.sender === 'user' ? 'Kamu  ' : 'Eco Bot'}:
                                     </strong>{' '}
-                                    {chat.message}
+                                    {typeof chat.message === 'function' ? chat.message() : chat.message}
                                 </div>
                             ))}
                         </div>
                         <div className="form-group mb-4">
-                            <label htmlFor="userInput" className="form-label">Kamu mau beli apa hari ini?</label>
                             <input
                                 type="text"
                                 id="userInput"
